@@ -184,7 +184,7 @@ extern void cgiHeaderCookieSetString(char *name, char *value,
 extern void cgiHeaderCookieSetInteger(char *name, int value,
 	int secondsToLive, char *path, char *domain);
 extern void cgiHeaderLocation(char *redirectUrl);
-extern void cgiHeaderStatus(int status, char *statusMessage);
+extern void cgiHeaderStatus(int status, const char *statusMessage);
 extern void cgiHeaderContentType(char *mimeType);
 
 typedef enum {

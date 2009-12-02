@@ -1883,7 +1883,7 @@ void cgiHeaderLocation(char *redirectUrl) {
 	fprintf(cgiOut, "Location: %s\r\n\r\n", redirectUrl);
 }
 
-void cgiHeaderStatus(int status, char *statusMessage) {
+void cgiHeaderStatus(int status, const char *statusMessage) {
 	fprintf(cgiOut, "Status: %d %s\r\n\r\n", status, statusMessage);
 }
 
