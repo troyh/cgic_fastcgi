@@ -119,7 +119,7 @@ typedef struct cgiFormEntryStruct {
 static cgiFormEntry *cgiFormEntryFirst;
 
 static cgiParseResultType cgiParseGetFormInput();
-static cgiParseResultType cgiParsePostFormInput();
+static cgiParseResultType cgiParsePostFormInput(FCGX_Stream* fcgiIn);
 static cgiParseResultType cgiParsePostMultipartInput();
 static cgiParseResultType cgiParseFormInput(char *data, int length);
 static void cgiSetupConstants();
@@ -238,7 +238,7 @@ int cgic_main(FCGX_Stream *in,FCGX_Stream *out,FCGX_Stream *err,FCGX_ParamArray 
 			fprintf(dout, "Calling PostFormInput\n");
 			CGICDEBUGEND	
 #endif /* CGICDEBUG */
-			if (cgiParsePostFormInput() != cgiParseSuccess) {
+			if (cgiParsePostFormInput(in) != cgiParseSuccess) {
 #ifdef CGICDEBUG
 				CGICDEBUGSTART
 				fprintf(dout, "PostFormInput failed\n");
@@ -320,7 +320,7 @@ static void cgiGetenv(char **s, const char *var,FCGX_ParamArray envp){
 	}
 }
 
-static cgiParseResultType cgiParsePostFormInput() {
+static cgiParseResultType cgiParsePostFormInput(FCGX_Stream* fcgiIn) {
 	char *input;
 	cgiParseResultType result;
 	if (!cgiContentLength) {
@@ -330,7 +330,7 @@ static cgiParseResultType cgiParsePostFormInput() {
 	if (!input) {
 		return cgiParseMemory;	
 	}
-	if (((int) fread(input, 1, cgiContentLength, cgiIn)) 
+	if (((int) FCGX_GetStr(input, cgiContentLength, fcgiIn)) 
 		!= cgiContentLength) 
 	{
 		return cgiParseIO;
