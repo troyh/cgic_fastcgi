@@ -1726,13 +1726,13 @@ cgiFormResultType cgiFormRadio(
 }
 
 cgiFormResultType cgiCookieString(
-	char *name,
+	const char *name,
 	char *value,
 	int space)
 {
 	char *p = cgiCookie;
 	while (*p) {
-		char *n = name;
+		const char *n = name;
 		/* 2.02: if cgiCookie is exactly equal to name, this
 			can cause an overrun. The server probably wouldn't
 			allow it, since a name without values makes no sense 

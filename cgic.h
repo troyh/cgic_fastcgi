@@ -168,7 +168,7 @@ extern cgiFormResultType cgiFormFileClose(
 	cgiFilePtr cfp);
 
 extern cgiFormResultType cgiCookieString(
-	char *name, char *result, int max);
+	const char *name, char *result, int max);
 
 extern cgiFormResultType cgiCookieInteger(
 	char *name, int *result, int defaultV);
