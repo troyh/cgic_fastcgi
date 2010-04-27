@@ -6,6 +6,7 @@ LIBS=-L./ -lcgic
 
 #all: libcgic.a cgictest.cgi capture
 all: libcgic.a 
+build: libcgic.a 
 
 install: libcgic.a
 	cp libcgic.a /usr/local/lib
@@ -28,3 +29,4 @@ capture: capture.o libcgic.a
 clean:
 	rm -f *.o *.a cgictest.cgi capture
 
+local_check:
